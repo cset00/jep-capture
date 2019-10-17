@@ -1,16 +1,20 @@
 FROM elixir:1.9.1
 
-WORKDIR /
+WORKDIR /app
 
 RUN apt-get update && \
   mix local.rebar --force && \
   mix local.hex --force
 
-COPY mix.exs mix.lock /
+COPY mix.exs mix.lock /app/
 
-RUN mix do deps.get, deps.compile, compile
+RUN mix deps.get
 
-COPY . .
+RUN mix do deps.compile, compile
+
+RUN MIX_ENV=test mix do deps.compile, compile
+
+COPY . /app
 
 EXPOSE 8080
 
