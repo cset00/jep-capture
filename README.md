@@ -1,21 +1,27 @@
-# Capture
+## Running in docker
+### Build image:
+docker-compose build
+### Run image:
+docker-compose up
 
-**TODO: Add description**
+## Without docker
+### Install dependencies
+mix deps.get
+### Reset db
+mix ecto.reset
+### Run server
+iex -S mix
 
-## Installation
+## View json in browser
+### Total responses for a survey:
+localhost:8080/responses?survey_id=<SURVEY_ID>
+### Total responses for a question:
+localhost:8080/responses?survey_id=<SURVEY_ID>&question_id=<QUESTION_ID>
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `capture` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:capture, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/capture](https://hexdocs.pm/capture).
-
+## Getting id's to add to url
+### dummy data available in seeds file
+### real data
+#### open db in psql
+psql capture_dev
+#### view responses table
+select * from responses
